@@ -1,0 +1,27 @@
+<import src="spa-item/spa-item-template.wxml" />
+
+<view>
+  <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+    <block wx:for="{{imgUrls}}" wx:key="item">
+      <swiper-item>
+        <image mode="widthFix" src="{{item}}" class="slide-image" />
+      </swiper-item>
+    </block>
+  </swiper>
+  <!-- 公告 -->
+  <view class='notice'>
+    <image src='/images/notice.png'></image>
+    <text>公告：注册用户直连按摩技师:</text>
+  </view>
+  <!-- 公告 -->
+  <view class="near-by">
+    <view class="lable">
+      <text class="today-recommend">选你喜欢</text>
+    </view>
+    <view class="near-by-list">
+      <block wx:for="{{recommends}}" wx:key="item">
+        <template is="spaItemTemplate" data="{{...item}}"/>
+      </block>
+    </view>
+  </view>
+</view>

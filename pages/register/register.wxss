@@ -1,0 +1,43 @@
+/* pages/register/register.wxss */
+page{
+  background-color: white;
+}
+.container{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+}
+
+.header image{
+  width: 100%;
+}
+
+.lable-input-group{
+  display: flex;
+  flex-direction: row;
+  margin: 40rpx;
+}
+.lable-input-group label{
+  display: inline-block;
+  width:156rpx;
+  line-height: 1.4rem;
+  padding: 4rpx;
+}
+.lable-input-group input{
+  width:300rpx;
+}
+.lable-input-group image{
+  width: 60rpx;
+  height: 60rpx;
+  padding: 4rpx;
+  margin-left: 18rpx;
+}
+.send-verifycode{
+  background-color: #00ff00;
+  line-height: 1.4rem;
+  padding: 4rpx;
+  margin-left: 18rpx;
+  border-radius: 6%;
+  color: white;
+}

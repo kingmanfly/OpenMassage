@@ -1,0 +1,49 @@
+/* pages/home/home.wxss */
+@import "spa-item/spa-item-template.wxss";
+.slide-image {
+  width: 100%;
+}
+
+.notice{
+  background-color: #fff;
+  height: 80rpx;
+  line-height: 80rpx;
+}
+
+.notice image{
+  width: 40rpx;
+  height: 40rpx;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+}
+
+.notice text{
+  font-size: 28rpx;
+  color: #666;
+}
+
+/* 附近 */
+.near-by {
+  margin-top: 30rpx;
+  background-color: #f6f7f8;
+}
+
+.near-by-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-left: 20rpx;
+}
+
+.lable {
+  padding: 20rpx 0 20rpx 20rpx;
+}
+
+.today-recommend {
+  color: #f78b4e;
+  padding-left: 16rpx;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+  border-left: 3px solid #f78b4e;
+  font-size: 30rpx;
+}

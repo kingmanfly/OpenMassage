@@ -1,0 +1,210 @@
+/* pages/register/register.wxss */
+page{
+  background-color: white;
+}
+.container{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+}
+
+.header image{
+  width: 100%;
+}
+.lable-input-group{
+  display: flex;
+  flex-direction: row;
+  margin: 40rpx;
+}
+.lable-input-group label{
+  display: inline-block;
+  width:156rpx;
+  line-height: 1.4rem;
+  padding: 4rpx;
+}
+.level-group{
+  margin-left: 40rpx;   
+}
+.specifications{
+  margin-top: 10rpx;
+}
+/*LXSegmentedControl容器*/
+.segmentedControl {
+    /*边框为2px 主色调为蓝*/
+    border: 4rpx solid #09cc6f;
+    /*圆角6px*/
+    border-radius: 6px;
+    /*控件宽度*/
+    width: 640rpx;
+    /*控件高度*/
+    height: 50rpx;
+}
+ 
+/*普通文本*/
+.segmentedControl text {
+    /*水平排列*/
+    float: left;
+    /*宽度为控件宽度的1/3 再减去2px的右边框*/
+    width: 156rpx;
+    /*字体大小*/
+    font-size: 28rpx;
+    /*主色调*/
+    color: #09cc6f;
+    /*行高，与控件高度相等*/
+    line-height: 50rpx;
+    /*文本水平居中*/
+    text-align: center;
+    /*右边距*/
+    border-right: 3rpx solid #09cc6f;
+}
+ 
+/*选中状态文本*/
+.segmentedControl text.selected {
+    /*同主色调*/
+    background-color: #09cc6f;
+    /*前景色为白色*/
+    color: white;
+}
+ 
+/*最后一个分组按钮*/
+.segmentedControl text.last {
+    /*不必右边框*/
+    border-right: 0;
+    /*高度也不必减少2px，就是控件高度的1/3*/
+    width: 166rpx;
+}
+
+/* 性别：男/女 */
+.segmentedControlSex {
+    /*边框为2px 主色调为蓝*/
+    border: 4rpx solid #09cc6f;
+    /*圆角6px*/
+    border-radius: 6px;
+    /*控件宽度*/
+    width: 320rpx;
+    /*控件高度*/
+    height: 50rpx;
+}
+ 
+/*普通文本*/
+.segmentedControlSex text {
+    /*水平排列*/
+    float: left;
+    /*宽度为控件宽度的1/3 再减去2px的右边框*/
+    width: 156rpx;
+    /*字体大小*/
+    font-size: 28rpx;
+    /*主色调*/
+    color: #09cc6f;
+    /*行高，与控件高度相等*/
+    line-height: 50rpx;
+    /*文本水平居中*/
+    text-align: center;
+    /*右边距*/
+    border-right: 3rpx solid #09cc6f;
+}
+ 
+/*选中状态文本*/
+.segmentedControlSex text.selected {
+    /*同主色调*/
+    background-color: #09cc6f;
+    /*前景色为白色*/
+    color: white;
+}
+ 
+/*最后一个分组按钮*/
+.segmentedControlSex text.last {
+    /*不必右边框*/
+    border-right: 0;
+    /*高度也不必减少2px，就是控件高度的1/3*/
+    width: 162rpx;
+}
+
+.show-person-avatar-group{
+  display: flex;
+  flex-direction: column;
+  margin: 40rpx;
+}
+.avatar-descripture{
+  font-size: 24rpx;
+  color: grey;
+}
+
+.avatar-container{
+  border: 2px solid #09cc6f;
+  margin-top: 20rpx;
+  width: 300rpx;
+  height: 300rpx;
+  align-self: center;
+}
+
+.avatar-container image{
+  width: 300rpx;
+  height: 300rpx;
+}
+
+.image-container{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  line-height: 1.3em;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.image-avatar-container{
+  position: relative;
+  line-height: 1.3em;
+}
+image-avatar-container .person-show-item-img{
+  width: 345rpx;
+  height: 345rpx;
+}
+.image-avatar-container .person-show-item-delete{
+  position: absolute;
+  z-index: 100;
+  width: 40rpx;
+  height: 40rpx;
+  margin-top: -22rpx;
+  margin-left: -22rpx;
+  border-radius: 50%;
+  background-color: red;
+}
+.show-person-group{
+  background-color: white;
+  padding-top: 20rpx;
+}
+.show-person-group>text{
+  margin-left: 40rpx;
+}
+
+.show-person-image-container{
+  position: relative;
+  line-height: 1.3em;
+  border: 2px solid #09cc6f;
+  width: 345rpx;
+  height: 345rpx;
+}
+.show-person-image-container .person-show-item-img{
+  width: 345rpx;
+  height: 345rpx;
+}
+
+.show-person-image-container .person-show-item-delete{
+  position: absolute;
+  z-index: 100;
+  width: 40rpx;
+  height: 40rpx;
+  margin-top: -22rpx;
+  margin-left: -22rpx;
+  border-radius: 50%;
+  background-color: red;
+}
+
+.person-show-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-left: 20rpx;
+}

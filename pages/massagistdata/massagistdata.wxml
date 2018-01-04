@@ -1,0 +1,85 @@
+<!--pages/massagistdata/massagistdata.wxml-->
+<view class="container">
+  <view class='header'>
+    <form bindsubmit="formSubmit">
+      <view class='lable-input-group'>
+        <label>昵称</label>
+        <input type='text' name='nickname' placeholder='请输入昵称'></input>
+      </view>
+
+      <view class='lable-input-group'>
+        <label>联系方式</label>
+        <input type='text' name='contact' placeholder='请输入手机号或微信号'></input>
+      </view>
+
+      <view class='lable-input-group'>
+        <label>年龄</label>
+        <input type='text' name='age' placeholder='请输入年龄'></input>
+      </view>
+
+      <view class='lable-input-group'>
+        <label>身高</label>
+        <input type='text' name='height' placeholder='请输入身高'></input>
+      </view>
+
+      <view class='level-group'>
+        <label>级别</label>
+        <view class="specifications">
+          <view class="segmentedControl">
+            <!-- 循环遍历 -->
+            <block wx:for="{{radioValues}}" wx:for-index="idx" wx:key='item'>
+              <text data-index="{{idx}}" data-item-index="{{idx}}" catchtap="indexChanged" class="{{clazz[idx]}}">{{item.value}}</text>
+            </block>
+          </view>
+        </view>
+      </view>
+      
+      <view class='lable-input-group'>
+        <label>性别</label>
+        <view class="specifications">
+          <view class="segmentedControlSex">
+            <!-- 循环遍历 -->
+            <block wx:for="{{radioSexValues}}" wx:for-index="idx" wx:key='item'>
+              <text data-index="{{idx}}" data-item-index="{{idx}}" catchtap="indexSexChanged" class="{{clazzSex[idx]}}">{{item.value}}</text>
+            </block>
+          </view>
+        </view>
+      </view>
+      <view class='lable-input-group'>
+        <label>接单城市</label>
+        <input type='text' name='workspace' placeholder='请输入接单城市'></input>
+      </view>
+      <view class='lable-input-group'>
+        <label>个人说明</label>
+        <textarea name='introduce' placeholder='gerenshuoming......'></textarea>
+      </view>
+      <view class='show-person-avatar-group'>
+        <view>
+          <text>头像展示</text>
+          <text class='avatar-descripture'>(用于在首页展示)</text>
+        </view>
+
+        <view class='avatar-container' bindtap='onAvatarShow'>
+          <view class='image-avatar-container'>
+            <image src="{{avatarShow == null? '/images/icon-add.png': avatarShow}}" class='person-show-item-img'></image>
+            <image wx:if="{{avatarShow != null}}" src="/images/icon-delete.png" class='person-show-item-delete' catchtap='onDeleteAvatarShow'></image>
+          </view>
+        </view>
+      </view>
+      <view class='show-person-group'>
+        <text>个人展示</text>
+        <view class="person-show-list">
+          <view wx:for="{{personShows}}" wx:key="item" class='image-container'>
+            <view class='show-person-image-container'>
+              <image src="{{item}}" bindtap="onPreviewPic" data-item='{{item}}' class='person-show-item-img'></image>
+              <image wx:if="{{item != '/images/icon-add.png'}}" catchtap='onDeletePersonShow' id='{{index}}' data-item='{{item}}'  src="/images/icon-delete.png" class='person-show-item-delete'></image>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view>
+        <button formType="submit" type='primary'>保存</button>
+      </view>
+    </form>
+  </view>
+</view>

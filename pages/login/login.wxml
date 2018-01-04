@@ -1,0 +1,26 @@
+<view class="container">
+  <view class='header'>
+    <image class="header-img" src="http://106.14.176.248/kingman/massage/images/banner_me.png"></image>
+    <form bindsubmit="formSubmit">
+      <view class='lable-input-group'>
+        <label>手机号码</label>
+        <input type='text' name='account' placeholder='请输入手机号码'></input>
+      </view>
+
+      <view class='lable-input-group'>
+        <label>密码</label>
+        <input type='text' name='password' placeholder='请输入密码'></input>
+        <image src='/images/display_or_not.png'></image>
+      </view>
+
+      <view>
+        <button type='primary' formType="submit">登录</button>
+      </view>
+    </form>
+  </view>
+
+  <view class='footer'>
+    <text bindtap='onRegister'>注册用户</text>
+    <text bindtap='onForgetPassword'>忘记密码</text>
+  </view>
+</view>

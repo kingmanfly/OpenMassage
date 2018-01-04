@@ -1,0 +1,31 @@
+<!--pages/masterlist/masterlist.wxml-->
+
+<view class="detail">
+  <view class="info">
+    <view class="detail_content">
+      <view class="detail_left">
+        <text class='nickname'>{{massagist.neckName}}</text>
+        <text class="type">高级技师</text>
+        <text class="type">{{massagist.age}}岁</text>
+      </view>
+    </view>
+    <view class="choose_num">
+      <text>微信号/手机号</text>
+      <text class='phone-number'>{{massagist.phone}}</text>
+      <text class='tip'>(登录可见)</text>
+    </view>
+    <view class="description">
+      <text>{{massagist.description}}</text>
+    </view>
+  </view>
+
+  <view class='show-person-container'>
+    <view class='lable'>个人展示</view>
+    <view class="show-list">
+      <view class="item" wx:for="{{shows}}" wx:key="item">
+        <image src='{{item.img}}'></image>
+      </view>
+    </view>
+  </view>
+
+</view>

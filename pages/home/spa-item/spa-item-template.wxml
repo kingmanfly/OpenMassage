@@ -1,0 +1,12 @@
+<template name="spaItemTemplate">
+    <view class="spa-item-container" bindtap="onItemClick" id='{{id}}'>
+        <image class="spa-item-img" src="{{pic_head_path}}"></image>
+        <view class="spa-item-info">
+          <view>
+            <text class="spa-item-title">{{neckname}}  </text>
+            <text class="spa-item-sex">{{age}}</text>
+          </view>
+          <text class="spa-item-desc">距我 {{distance}}Km</text>
+        </view> 
+    </view>
+</template>

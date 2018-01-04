@@ -1,0 +1,87 @@
+<view class="container">
+  <view>
+    <image class="header-img" src="http://106.14.176.248/kingman/massage/images/banner_me.png"></image>
+    <view class="header">
+      <view class="user">
+        <image src="http://106.14.176.248/kingman/massage/images/icon_me.png"></image>
+        <text bindtap='onNickNameClick'>{{nickName}}</text>
+      </view>
+    </view>
+    <view class='info' wx:if="{{isLogin}}">
+      <view class='general-user-type' wx:if="{{profile.category == 1}}">
+        <text>{{profile.neckname}}, 你已经注册成功</text>
+        <text>如需接单，需升级为技师</text>
+        <button type="primary" bindtap='onMassagistData'>升级做按摩技师</button>
+      </view>
+      <view class='massigist-type' wx:if="{{profile.category == 2}}">
+        <view class='lable-text-group'>
+          <label>昵称</label>
+          <text>{{profile.neckname}}</text>
+          <text class='edit' bindtap='onEditMassagistData'>编辑个人信息</text>
+        </view>
+        <view class='divide-line'></view>
+        <view class='lable-text-group'>
+          <label>联系方式</label>
+          <text>{{profile.phone}}</text>
+        </view>
+        <view class='divide-line'></view>
+        <view class='lable-text-group'>
+          <label>年龄</label>
+          <text>{{profile.age}}</text>
+        </view>
+        <view class='divide-line'></view>
+        <view class='lable-text-group'>
+          <label>身高</label>
+          <text>{{profile.height}}</text>
+        </view>
+        <view class='divide-line'></view>
+        <view class='lable-text-group'>
+          <label>级别</label>
+          <text wx:if="{{profile.level == 1}}">高级技师</text>
+          <text wx:elif="{{profile.level == 2}}">中级技师</text>
+          <text wx:elif="{{profile.level == 3}}">初级技师</text>
+          <text wx:else>实习技师</text>
+        </view>
+        <view class='divide-line'></view>
+        <view class='lable-text-group'>
+          <label>性别</label>
+          <text wx:if="{{profile.sex == 1}}">男</text>
+          <text wx:else>女</text>
+        </view>
+        <view class='divide-line'></view>
+        <view class='lable-text-group'>
+          <label>接单城市</label>
+          <text>上海</text>
+        </view>
+        <view class='divide-line'></view>
+        <view class='descripture-group'>
+          <label>个人说明</label>
+          <view></view>
+          <text>{{profile.description}}</text>
+        </view>
+        <view class='divide-line'></view>
+        <view class='avatar-show-group'>
+          <label>展示头像</label>
+          <image src="{{profile.pic_head_path}}" class='person-show-item-img'></image>
+        </view>
+        <view class='divide-line'></view>
+
+        <view class='show-person-group'>
+          <text>个人展示</text>
+          <view class="person-show-list">
+            <view wx:for="{{profile.pic_show_path}}" wx:key="item" class='image-container'>
+              <view class='show-person-image-container'>
+                <image src="{{item.img}}" bindtap="onPreviewPic" id='{{item.id}}' class='person-show-item-img'></image>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+  </view>
+
+  <view class='footer' bindtap='onLogout' wx:if="{{isLogin}}">
+    <button type='warn'>退出</button>
+  </view>
+</view>
