@@ -18,7 +18,7 @@ Page({
 
     // 附近按摩技师
     recommends: [
-      {
+      /*{
         "id": 1,
         "image": "/images/meinv1.jpg",
         "title": "暖心",
@@ -45,15 +45,8 @@ Page({
         "title": "白领",
         "descripture": "距你11.9Km",
         "price": "28岁"
-      }
+      }*/
     ],
-  },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-  
   },
 
   /**
@@ -108,6 +101,7 @@ Page({
         _this.setData({
           recommends:res.data.data.nearlyskillers
         });
+        var ii = 1;
       },
       fail: function (res) {
         console.log(res);

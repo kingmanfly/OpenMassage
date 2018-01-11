@@ -16,13 +16,13 @@
       <view class='lable-input-group'>
         <label wx:if="{{fromType == 1}}">密码</label>
         <label wx:else>新密码</label>
-        <input  name="password" type='text' placeholder='请输入密码'></input>
-        <image src='/images/display_or_not.png'></image>
+        <input  name="password" password='{{passwordTag}}' type='text' placeholder='请输入密码'></input>
+        <image src='/images/display_or_not.png' bindtap='onTogglePasswordViewStatus'></image>
       </view>
 
       <view class='lable-input-group'>
         <label>确认密码</label>
-        <input  name="passwordConfirm" type='text' placeholder='请确认密码'></input>
+        <input  name="passwordConfirm" type='text' password='{{display}}' placeholder='请确认密码'></input>
       </view>
 
       <view class='lable-input-group' wx:if="{{fromType == 1}}">

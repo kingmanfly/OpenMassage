@@ -9,8 +9,8 @@
 
       <view class='lable-input-group'>
         <label>密码</label>
-        <input type='text' name='password' placeholder='请输入密码'></input>
-        <image src='/images/display_or_not.png'></image>
+        <input type='text' password='{{password_tag}}' name='password' placeholder='请输入密码'></input>
+        <image src='/images/display_or_not.png' bindtap='onTogglePasswordViewStatus'></image>
       </view>
 
       <view>

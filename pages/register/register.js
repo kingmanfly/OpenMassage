@@ -10,7 +10,8 @@ Page({
   data: {
     // fromType 1. 来自注册，2. 来自忘记密码
     fromType: null,
-    verifyCode:null
+    verifyCode: null,
+    passwordTag: true
   },
 
   /**
@@ -104,5 +105,10 @@ Page({
       return false;
     }
     return true;
+  },
+  onTogglePasswordViewStatus : function () {
+    this.setData({
+      passwordTag: !this.data.passwordTag
+    });
   }
 })

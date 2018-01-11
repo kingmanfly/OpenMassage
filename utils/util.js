@@ -11,9 +11,6 @@ function trim(str, is_global){
     return "";
   }
 }
-function trimAll(str){
-
-}
 
 function formatTime(date) {
   var year = date.getFullYear()

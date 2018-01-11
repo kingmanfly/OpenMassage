@@ -1,11 +1,12 @@
 var app = getApp();
 
-function uploadimg(data, callback) {
-  var that = this,
+function uploadimg(data, _this, callback) {
+  var that = _this,
     i = data.i ? data.i : 0,
     success = data.success ? data.success : 0,
     fail = data.fail ? data.fail : 0;
   var successArray = new Array();
+
 
   wx.uploadFile({
     url: data.url,
@@ -30,7 +31,7 @@ function uploadimg(data, callback) {
       if (i == data.path.length) {  //当图片传完时，停止调用     
         console.log('执行完毕');
         console.log('成功：' + success + " 失败：" + fail);
-        if (typeof callback === "function"){
+        if (typeof callback === "function") {
           console.log('I am here')
           callback(successArray);
         }
@@ -39,7 +40,7 @@ function uploadimg(data, callback) {
         data.i = i;
         data.success = success;
         data.fail = fail;
-        that.uploadimg(data);
+        uploadimg(data, _this, callback);
       }
     }
   })

@@ -2,6 +2,7 @@
 var util = require('../../utils/util.js');
 var netutil = require('../../utils/netutil.js');
 var app = getApp();
+var userInfo = {};
 
 Page({
   /**
@@ -28,7 +29,7 @@ Page({
     deleteShowsList: [],
     avatarShow: null,
     massagistLevel: 1,
-    gender: 0
+    gender: 0,
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -260,39 +261,126 @@ Page({
       console.log("tmp");
       util.removeObjWithArr(this.data.uploadShowsList, event.currentTarget.dataset.item);
     }else{
-      deleteShowsList.push(event.currentTarget.dataset.item);
+      
+      this.data.deleteShowsList.push(event.currentTarget.dataset.item);
     }
     if (pS[pS.length - 1] != '/images/icon-add.png') {
       pS.push('/images/icon-add.png');
     }
     this.setData({
       personShows: pS,
-      uploadShowsList: this.data.uploadShowsList
+      uploadShowsList: this.data.uploadShowsList,
+      deleteShowsList: this.data.deleteShowsList
     });
   },
   formSubmit: function (event) {
     console.log('event=' + event);
-    if(checkFormSuccess()){
-      this.saveMassigistInfo(event);
-      this.commitPersonShowsInServer();
-      this.deletePersonShowsInServer();
+    if (this.checkFormSuccess(event)){
+      this.saveMassigistInfo();
     }
-    
   },
-  saveMassigistInfo: function(event){
+  checkFormSuccess: function (event) {
+    var nickname = util.trim(event.detail.value.nickname, '');
+    userInfo.nickname = nickname;
+    if (nickname == null || nickname.length < 2) {
+      wx.showToast({
+        title: '取个风骚一点的名字吧',
+        icon: 'success',
+        duration: 2000
+      })
+      return false;
+    }
+    var contact = util.trim(event.detail.value.contact, '');
+    userInfo.contact = contact;
+    if (contact == null || contact.length < 4) {
+      wx.showToast({
+        title: '微信格式不对呀，请认真填写',
+        icon: 'success',
+        duration: 2000
+      })
+      return false;
+    }
+    var age = util.trim(event.detail.value.age, '');
+    userInfo.age = age;
+    if (age == null || age.length == 0){
+      wx.showToast({
+        title: '年龄字段不能为空',
+        icon: 'success',
+        duration: 2000
+      })
+      return false;
+    } else if (parseInt(age) < 18) {
+      wx.showToast({
+        title: '还是去读书吧',
+        icon: 'success',
+        duration: 2000
+      })
+      return false;
+    }
+    var height = util.trim(event.detail.value.height, '');
+    userInfo.height = height;
+    if (height == null || height.length == 0) {
+      wx.showToast({
+        title: '身高字段不能为空',
+        icon: 'success',
+        duration: 2000
+      })
+      return false;
+    }else if (parseInt(height) < 150) {
+      wx.showToast({
+        title: '太矮了吧',
+        icon: 'success',
+        duration: 2000
+      })
+      return false;
+    }
+    var introduce = util.trim(event.detail.value.introduce, '');
+    userInfo.introduce = introduce;
+    if (introduce == null || introduce.length == 0) {
+      wx.showToast({
+        title: '个人介绍不能为空',
+        icon: 'success',
+        duration: 2000
+      })
+      return false;
+    }
+    var workspace = util.trim(event.detail.value.workspace, '');
+    userInfo.workspace = workspace;
+    if (workspace == null || workspace.length == 0) {
+      wx.showToast({
+        title: '工作地点不能为空',
+        icon: 'success',
+        duration: 2000
+      })
+      return false;
+    }
+    if (this.data.avatarShow == null){
+      wx.showToast({
+        title: '头像不能为空',
+        icon: 'success',
+        duration: 2000
+      })
+      return false;
+    }else{
+      userInfo.avatarShow = this.data.avatarShow
+    }
+    return true;
+  },
+  saveMassigistInfo: function(){
+    var _this = this;
     var uploadTask = wx.uploadFile({
       url: app.globalData.urlBase2 + 'skillerUser/skillerRegister',
-      filePath: this.data.avatarShow,
+      filePath: userInfo.avatarShow,
       name: 'file',
       formData: {
-        phone: event.detail.value.contact,
+        phone: userInfo.contact,
         token: wx.getStorageSync(app.globalData.token),
-        age: event.detail.value.age,
-        height: event.detail.value.height,
-        description: event.detail.value.introduce,
+        age: userInfo.age,
+        height: userInfo.height,
+        description: userInfo.introduce,
         level: this.data.massagistLevel,
         sex: this.data.gender,
-        location: event.detail.value.workspace,
+        location: userInfo.workspace,
         latitude: '-1',
         longitude: '-1',
       },
@@ -300,44 +388,102 @@ Page({
         'content-type': 'multipart/form-data'
       },
       success: function (res) {
-        var data = res.data
-        //do something
+        var data = JSON.parse(res.data);
+        if (data.code == 1){
+          _this.deletePersonShowsInServer(_this);
+          console.log("基础信息写入成功");
+          wx.redirectTo({
+            url: '/pages/me/me',
+          });
+        }else{
+          wx.showToast({
+            title: '更新失败skillerRegister',
+            icon: 'fail',
+            duration: 2000
+          })
+        }
+      },
+      fail: function(res){
+        console.log("uploadFile skillerUser/skillerRegister Fail res = " + res);
+        wx.showToast({
+          title: '更新失败skillerRegister',
+          icon: 'fail',
+          duration: 2000
+        })
       }
     })
-    uploadTask.onProgressUpdate((res) => {
+    /*uploadTask.onProgressUpdate((res) => {
       console.log('上传进度', res.progress)
       console.log('已经上传的数据长度', res.totalBytesSent)
       console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)
-    })
+    })*/
   },
-  commitPersonShowsInServer: function(){
-    netutil.uploadimg({
-      url: app.globalData.urlBase2 + 'skillerUser/uploadPersonShows',
-      path: uploadShowsList
-    }, function(res){
-      console.log('res = ' + res);
-      for (var i = res.successArray.length - 1; i >= 0; i--){
-        uploadShowsList.splice(res.successArray[i], 1);
-      }
-    })
+  deletePersonShowsInServer: function (that) {
+    if (that.data.deleteShowsList.length == 0) {
+      that.commitPersonShowsInServer(that);
+    } else {
+      wx.request({
+        url: app.globalData.urlBase2 + 'skillerUser/delete',
+        method: 'POST',
+        data: {
+          token: wx.getStorageSync(app.globalData.token),
+          items: that.data.deleteShowsList.toString()
+        },
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        success: function (res) {
+          if(res.statusCode == 0){
+            that.commitPersonShowsInServer(that);
+          }else{
+            wx.showToast({
+              title: '更新失败delete',
+              icon: 'fail',
+              duration: 2000
+            })
+          }
+        },
+        fail: function (res) {
+          wx.showToast({
+            title: '更新失败delete',
+            icon: 'fail',
+            duration: 2000
+          })
+        }
+      })
+    }
   },
-  deletePersonShowsInServer: function () {
-    wx.request({
-      url: app.globalData.urlBase2 + 'skillerUser/delete',
-      method: 'POST',
-      data: {
-        token: wx.getStorageSync(app.globalData.token),
-        items: deleteShowsList.toString()
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      success: function(res){
-
-      },
-      fail: function (res) {
-
-      }
-    })
+  commitPersonShowsInServer: function(that){
+    if(that.data.uploadShowsList.length == 0){
+      wx.switchTab({
+        url: '/pages/me/me',
+      });
+    }else{
+      netutil.uploadimg({
+        url: app.globalData.urlBase2 + 'skillerUser/insertPicShow',
+        path: that.data.uploadShowsList
+      }, 
+      that,
+      function (res) {
+        console.log('res = ' + res);
+        if (res == null || res.length == 0) {
+          wx.showToast({
+            title: '上传方法异常，请工程师调试',
+            icon: 'fail',
+            duration: 2000
+          })
+          return;
+        } else {
+          if (res.length > 0){
+            that.setData({
+              uploadShowsList: []
+            });
+            wx.switchTab({
+              url: '/pages/me/me',
+            })
+          }
+        }
+      })
+    }
   }
 })

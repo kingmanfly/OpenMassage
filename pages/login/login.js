@@ -3,7 +3,7 @@ var app = getApp();
 
 Page({
   data:{
-
+    password_tag: true,
   },
 
   onLogin: function(token){
@@ -68,5 +68,10 @@ Page({
       return false;
     } 
     return true;
+  },
+  onTogglePasswordViewStatus : function(){
+    this.setData({
+      password_tag: !this.data.password_tag
+    });
   }
 })

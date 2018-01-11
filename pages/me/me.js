@@ -8,13 +8,8 @@ Page({
   data: {
     isLogin: false,
     nickName: "登录/注册",
-    personShows: [
-      { id: -1, img: '/images/meinv1.jpg' },
-      { id: -1, img: '/images/meinv2.jpg' },
-      { id: -1, img: '/images/meinv1.jpg' },
-      { id: -1, img: '/images/meinv2.jpg' },
-    ],
-    profile: null
+    personShows: [],
+    profile: null,
   },
 
   /**
@@ -64,6 +59,11 @@ Page({
           _this.setData({
             profile: res.data.data.PersonalInformation[0]
           });
+          if (_this.data.profile.pic_show_path != null && _this.data.profile.pic_show_path.length > 0){
+            _this.setData({
+              personShows: _this.data.profile.pic_show_path.split(",")
+            });
+          }
         }
       },
       fail: function (res) {
@@ -85,7 +85,6 @@ Page({
     this.setData({
       isLogin:false,
       nickName: '登录/注册'
-      
     });
     wx.navigateTo({
       url: '/pages/login/login',

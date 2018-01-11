@@ -17,7 +17,7 @@
         <view class='lable-text-group'>
           <label>昵称</label>
           <text>{{profile.neckname}}</text>
-          <text class='edit' bindtap='onEditMassagistData'>编辑个人信息</text>
+          <text hidden="{true}" class='edit' bindtap='onEditMassagistData'>编辑个人信息</text>
         </view>
         <view class='divide-line'></view>
         <view class='lable-text-group'>
@@ -69,9 +69,9 @@
         <view class='show-person-group'>
           <text>个人展示</text>
           <view class="person-show-list">
-            <view wx:for="{{profile.pic_show_path}}" wx:key="item" class='image-container'>
+            <view wx:for="{{personShows}}" wx:key="item" class='image-container'>
               <view class='show-person-image-container'>
-                <image src="{{item.img}}" bindtap="onPreviewPic" id='{{item.id}}' class='person-show-item-img'></image>
+                <image src="{{item}}" bindtap="onPreviewPic" class='person-show-item-img'></image>
               </view>
             </view>
           </view>
