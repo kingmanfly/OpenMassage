@@ -48,8 +48,17 @@ function removeObjWithArr(_arr, _obj) {
   }
 }
 
+function formatSecretData(str) {
+  if(str == null || str.length < 3){
+    return null;
+  } else {
+    return str.substring(0,3) + "********"
+  }
+}
+
 module.exports = {
   formatTime: formatTime,
   trim: trim,
-  removeObjWithArr: removeObjWithArr
+  removeObjWithArr: removeObjWithArr,
+  formatSecretData: formatSecretData
 }

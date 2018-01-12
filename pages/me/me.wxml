@@ -3,8 +3,9 @@
     <image class="header-img" src="http://106.14.176.248/kingman/massage/images/banner_me.png"></image>
     <view class="header">
       <view class="user">
-        <image src="http://106.14.176.248/kingman/massage/images/icon_me.png"></image>
-        <text bindtap='onNickNameClick'>{{nickName}}</text>
+        <image src="{{userInfo.avatarUrl}}"></image>
+        <text wx:if="{{isLogin}}" bindtap='onNickNameClick'>{{userInfo.nickName}}</text>
+        <text wx:else bindtap='onNickNameClick'>{{nickName}}</text>
       </view>
     </view>
     <view class='info' wx:if="{{isLogin}}">

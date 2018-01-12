@@ -6,7 +6,7 @@
             <text class="spa-item-title">{{neckname}}  </text>
             <text class="spa-item-sex">{{age}}</text>
           </view>
-          <text class="spa-item-desc">距我 {{distance}}Km</text>
+          <text class="spa-item-desc">距我 {{distance/1000}}Km</text>
         </view> 
     </view>
 </template>

@@ -27,6 +27,7 @@
   white-space: nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
+  padding-top: 10rpx;
 }
 .spa-item-sex{
   font-size: 32rpx;

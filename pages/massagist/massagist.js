@@ -1,30 +1,18 @@
 // pages/masterlist/masterlist.js
+var util = require('../../utils/util.js');
 var app = getApp()
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    "massagist": {
-      "stars": [0, 1, 2],
-      "master_dec": "副主任医师,毕业于北京中医药大学中医系,师从于全国著名中医妇科专家郭志强教授,从事医疗工作二十余年.擅长治疗男女不育、不孕症,盆腔炎,顽固性痛经,崩漏,乳腺增生,子宫肌瘤,月经不调,更年期综合征等妇科疑难病症.",
-      "choose_num": "666",
-      
+    massagist: {
+      master_dec: "",
+      phone: ""
     },
-    "shows": [
-      {
-        "img": app.globalData.urlBase + "massage/images/spa_detail1.png",
-      },
-      {
-        "img": app.globalData.urlBase + "massage/images/spa_detail2.png",
-      },
-      {
-        "img": app.globalData.urlBase + "massage/images/spa_detail3.png",
-      },
-      {
-        "img": app.globalData.urlBase + "massage/images/spa_detail4.png",
-      }
-    ]
+    formatPhone: "",
+    shows: [],
+    registerUser: false
   },
 
   /**
@@ -33,6 +21,11 @@ Page({
   onLoad: function (options) {
     console.log(options.id);
     this.getMassigistDetail(options.id);
+    if(app.globalData.isLogin){
+      this.setData({
+        registerUser: true
+      })
+    }
   },
 
   /**
@@ -94,12 +87,24 @@ Page({
       success: function(res){
         console.log(res.data);
         _this.setData({
-          massagist: res.data.data
+          massagist: res.data.data,
+          formatPhone: util.formatSecretData(res.data.data.phone),          
         });
+        if (res.data.data.pic_show_path != null && res.data.data.pic_show_path.length > 0){
+          _this.setData({
+            shows: res.data.data.pic_show_path.split(",")
+          });
+        }
+        console.log("shows = " + _this.data.shows);
       },
       fail: function (res) {
         console.log(res.data);
       }
+    })
+  },
+  onLaunchLogin: function(){
+    wx.navigateTo({
+      url: '/pages/login/login',
     })
   }
 })

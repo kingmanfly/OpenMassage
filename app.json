@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/me/me",
     "pages/home/home",
+    "pages/me/me",
     "pages/massagistdata/massagistdata",
     "pages/login/login",
     "pages/register/register",

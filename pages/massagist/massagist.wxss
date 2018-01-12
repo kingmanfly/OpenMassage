@@ -82,10 +82,11 @@
   border-bottom: 1px solid #dfe0e1;
 }
 .show-list item{
-  width: 50%;
+  width: 44%;
 }
 .show-list image{
   width: 345rpx;
   height: 345rpx;
-  margin-left: 16rpx;
+  margin-left: 10rpx;
+  border: 2px solid #09cc6f;
 }

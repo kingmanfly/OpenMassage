@@ -17,36 +17,7 @@ Page({
     duration: 1000,
 
     // 附近按摩技师
-    recommends: [
-      /*{
-        "id": 1,
-        "image": "/images/meinv1.jpg",
-        "title": "暖心",
-        "descripture": "距你0.9Km",
-        "price": "18岁"
-      },
-      {
-        "id": 2,
-        "image": "/images/meinv2.jpg",
-        "title": "Kalolin",
-        "descripture": "距你2.9Km",
-        "price": "20岁"
-      },
-      {
-        "id": 3,
-        "image": app.globalData.urlBase + "massage/images/technician1.png",
-        "title": "爱妃",
-        "descripture": "距你3.9Km",
-        "price": "24岁"
-      },
-      {
-        "id": 4,
-        "image": app.globalData.urlBase + "massage/images/spa_chinese.png",
-        "title": "白领",
-        "descripture": "距你11.9Km",
-        "price": "28岁"
-      }*/
-    ],
+    recommends: [],
   },
 
   /**
@@ -88,8 +59,8 @@ Page({
       url: app.globalData.urlBase2 + 'skillerUser/nearlyskillers',
       method: 'POST',
       data:{
-        latitude: '31.219136',
-        longitude: '121.538878',
+        latitude: app.globalData.latitude,
+        longitude: app.globalData.longitude,
         pageNo: '1',
         pageSize: '10'
       },
