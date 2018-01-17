@@ -18,6 +18,9 @@
     <view class="lable">
       <text class="today-recommend">选你喜欢</text>
     </view>
+    <view wx:if="{{!isAuthLocation}}" class='tip-location' bindtap='onAuthLocation'>
+      <text>由于我们的推荐是基于您的位置的，所以需要您授权使用位置信息,点击授权</text>
+    </view>
     <view class="near-by-list">
       <block wx:for="{{recommends}}" wx:key="item">
         <template is="spaItemTemplate" data="{{...item}}"/>

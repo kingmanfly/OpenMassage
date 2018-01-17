@@ -18,15 +18,37 @@ Page({
 
     // 附近按摩技师
     recommends: [],
+    isAuthLocation: false
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    this.getNearbySkiller();
+    var that = this;
+    if (app.globalData.latitude > 0){
+      that.setData({
+        isAuthLocation: true
+      })
+      that.getNearbySkiller();
+    }
   },
-
+  getLocation: function(){
+    var that = this;
+    wx.getLocation({
+      type: 'wgs84',
+      success: res => {
+        app.globalData.latitude = res.latitude;
+        app.globalData.longitude = res.longitude;
+        console.log("latitude = " + app.globalData.latitude);
+        console.log("longitude = " + app.globalData.longitude);
+        that.getNearbySkiller();
+      },
+      fail: res => {
+        console.log("fail res = " + res);
+      }
+    })
+  },
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
@@ -72,11 +94,33 @@ Page({
         _this.setData({
           recommends:res.data.data.nearlyskillers
         });
-        var ii = 1;
       },
       fail: function (res) {
         console.log(res);
       }
     })
+  },
+  onAuthLocation: function(){
+    console.log("onAuthLocation");
+    var that = this;
+    wx.getSetting({
+      success: res => {
+        if (res.authSetting['scope.userLocation']) {
+          // 已经授权，可以直接调用 getLocation，不会弹框
+          that.getLocation();
+        } else {
+          wx.openSetting({
+            success: (res) => {
+              if (res.authSetting['scope.userLocation'] == true){
+                that.setData({
+                  isAuthLocation: true
+                })
+                that.getLocation();
+              }
+            }
+          });
+        }
+      }
+    });
   }
 })

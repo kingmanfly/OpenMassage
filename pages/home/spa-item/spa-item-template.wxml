@@ -3,7 +3,7 @@
         <image class="spa-item-img" src="{{pic_head_path}}"></image>
         <view class="spa-item-info">
           <view>
-            <text class="spa-item-title">{{neckname}}  </text>
+            <text class="spa-item-title">{{nickname}}  </text>
             <text class="spa-item-sex">{{age}}</text>
           </view>
           <text class="spa-item-desc">距我 {{distance/1000}}Km</text>

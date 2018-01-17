@@ -10,14 +10,14 @@
     </view>
     <view class='info' wx:if="{{isLogin}}">
       <view class='general-user-type' wx:if="{{profile.category == 1}}">
-        <text>{{profile.neckname}}, 你已经注册成功</text>
+        <text>{{profile.nickname}}, 你已经注册成功</text>
         <text>如需接单，需升级为技师</text>
         <button type="primary" bindtap='onMassagistData'>升级做按摩技师</button>
       </view>
       <view class='massigist-type' wx:if="{{profile.category == 2}}">
         <view class='lable-text-group'>
           <label>昵称</label>
-          <text>{{profile.neckname}}</text>
+          <text>{{profile.nickname}}</text>
           <text hidden="{true}" class='edit' bindtap='onEditMassagistData'>编辑个人信息</text>
         </view>
         <view class='divide-line'></view>

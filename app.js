@@ -14,38 +14,32 @@ App({
    * 当小程序初始化完成时，会触发 onLaunch（全局只触发一次）
    */
   onLaunch: function () {
+    var that = this;
     this.globalData.isLogin = wx.getStorageSync(this.globalData.token) != null ? true : false;
     // 登录
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
       }
-    })
+    });
     // 获取用户信息
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          this.getUserInfo();
+          that.getUserInfo();
         } else {
           console.log("not auth");
           wx.authorize({
             scope: 'scope.userInfo',
             success() {
-              this.getUserInfo();
+              that.getUserInfo();
             }
           })
         }
       }
-    })
-  
-    wx.getLocation({
-      type: 'wgs84',
-      success: res => {
-        this.globalData.latitude = res.latitude
-        this.globalData.longitude = res.longitude
-      }
-    })
+    });
+    that.getLocation();
   },
   getUserInfo: function(){
     wx.getUserInfo({
@@ -60,6 +54,17 @@ App({
         }
       }
     }) 
+  },
+  getLocation: function(){
+    wx.getLocation({
+      type: 'wgs84',
+      success: res => {
+        this.globalData.latitude = res.latitude;
+        this.globalData.longitude = res.longitude;
+        console.log("latitude = " + this.globalData.latitude);
+        console.log("longitude = " + this.globalData.longitude)
+      }
+    })
   },
   /**
    * 当小程序启动，或从后台进入前台显示，会触发 onShow

@@ -47,3 +47,10 @@
   border-left: 3px solid #f78b4e;
   font-size: 30rpx;
 }
+.tip-location{
+  text-align: center;
+  background-color: #f78b4e;
+  color: #f6f7f8;
+  font-size: 36rpx;
+  padding: 10rpx;
+}

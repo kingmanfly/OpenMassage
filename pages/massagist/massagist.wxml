@@ -4,7 +4,7 @@
   <view class="info">
     <view class="detail_content">
       <view class="detail_left">
-        <text class='nickname'>{{massagist.neckName}}</text>
+        <text class='nickname'>{{massagist.nickName}}</text>
         <text class="type">高级技师</text>
         <text class="type">{{massagist.age}}岁</text>
       </view>
