@@ -34,10 +34,16 @@ page{
   margin-left: 18rpx;
 }
 .send-verifycode{
-  background-color: #00ff00;
+  background-color: #09cc6f;
   line-height: 1.4rem;
   padding: 4rpx;
   margin-left: 18rpx;
+  min-width: 100rpx;
+  text-align: center;
   border-radius: 6%;
+  color: white;
+}
+.btn-submit{
+  background-color: #09cc6f;
   color: white;
 }

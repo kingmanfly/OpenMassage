@@ -4,13 +4,14 @@
     <form class='content' bindsubmit="formSubmit" >
       <view class='lable-input-group'>
         <label>手机号码</label>
-        <input name="phone" type='num' placeholder='请输入手机号码'></input>
+        <input name="phone" type='num' placeholder='请输入手机号码' bindinput ="userPhoneInput"></input>
       </view>
 
       <view class='lable-input-group'>
         <label>手机验证码</label>
         <input name="validCode" type='text' value='{{verifyCode}}' placeholder='请输入验证码'></input>
-        <text class='send-verifycode' bindtap='onSendVerifyCode'>发送验证码</text>
+        <text wx:if="{{enableGet}}" class='send-verifycode' bindtap='onSendVerifyCode'>获取验证码</text>
+        <text wx:else class='send-verifycode'>{{countDownSecond}}秒</text>
       </view>
 
       <view class='lable-input-group'>
@@ -27,12 +28,12 @@
 
       <view class='lable-input-group' wx:if="{{fromType == 1}}">
         <label>昵称</label>
-        <input name="nick" type='text' placeholder='请确认昵称'></input>
+        <input name="nickname" type='text' placeholder='请确认昵称'></input>
       </view>
 
       <view>
-        <button formType="submit" wx:if="{{fromType == 1}}" type='primary'>注册</button>
-        <button formType="submit" wx:else type='primary'>提交</button>
+        <button formType="submit" wx:if="{{fromType == 1}}" class='btn-submit'>注册</button>
+        <button formType="submit" wx:else class='btn-submit'>提交</button>
       </view>
     </form>
   </view>

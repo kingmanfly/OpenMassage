@@ -1,10 +1,10 @@
 {
   "pages": [
+    "pages/register/register",
     "pages/home/home",
     "pages/me/me",
     "pages/massagistdata/massagistdata",
     "pages/login/login",
-    "pages/register/register",
     "pages/massagist/massagist"
   ],
   "window": {

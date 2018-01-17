@@ -2,7 +2,7 @@
 <view class="container">
   <view class='header'>
     <form bindsubmit="formSubmit">
-      <view class='lable-input-group'>
+      <view class='lable-input-group' hidden='{{true}}'>
         <label>昵称</label>
         <input type='text' name='nickname' placeholder='请输入昵称'></input>
       </view>
