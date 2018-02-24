@@ -24,7 +24,7 @@
     <view class='lable'>个人展示</view>
     <view class="show-list">
       <view class="item" wx:for="{{shows}}" wx:key="item">
-        <image src='{{item}}'></image>
+        <image src='{{item}}' data-item="{{item}}" data-set="{{shows}}" bindtap='onPreview'></image>
       </view>
     </view>
   </view>

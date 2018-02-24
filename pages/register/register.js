@@ -65,6 +65,10 @@ Page({
       },
       success: function(res){
         console.log(res);
+        that.setData({
+          verifyCode: res.data.data.vcode
+        });
+        console.log("" + that.data.data.verifyCode);
       },
       fail: function(res){
         console.log(res);
@@ -103,7 +107,9 @@ Page({
             phone: util.trim(event.detail.value.phone, 'all'),
             password: event.detail.value.password,
             checkcode: event.detail.value.validCode,
-            nickname: event.detail.value.nickname
+            nickname: event.detail.value.nickname,
+            latitude: app.globalData.latitude,
+            longitude: app.globalData.longitude
           },
           header: {
             'content-type': 'application/x-www-form-urlencoded'

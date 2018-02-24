@@ -23,8 +23,13 @@
     </view>
     <view class="near-by-list">
       <block wx:for="{{recommends}}" wx:key="item">
-        <template is="spaItemTemplate" data="{{...item}}"/>
+        <template is="spaItemTemplate" data="{{...item}}" />
       </block>
+    </view>
+    <view class="bottom-center" wx:if='{{isNoMoreData}}'>
+      <text>——————</text>
+      <text>我是有底线的</text>
+      <text>——————</text>
     </view>
   </view>
 </view>

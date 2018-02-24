@@ -1,5 +1,4 @@
 App({
-
   globalData: {
     token: 'token',
     urlBase: "http://106.14.176.248/kingman/",
@@ -56,13 +55,32 @@ App({
     }) 
   },
   getLocation: function(){
+    var that = this;
     wx.getLocation({
       type: 'wgs84',
       success: res => {
-        this.globalData.latitude = res.latitude;
-        this.globalData.longitude = res.longitude;
-        console.log("latitude = " + this.globalData.latitude);
-        console.log("longitude = " + this.globalData.longitude)
+        that.globalData.latitude = res.latitude;
+        that.globalData.longitude = res.longitude;
+        if (that.globalData.isLogin){
+          wx.request({
+            url: that.globalData.urlBase2 + 'user/flashposition',
+            method: 'POST',
+            header: {
+              'content-type': 'application/x-www-form-urlencoded'
+            },
+            data: {
+              token: wx.getStorageSync(that.globalData.token),
+              latitude: that.globalData.latitude,
+              longitude: that.globalData.longitude,
+            },
+            success: function (res) {
+              console.log(res.data);
+            },
+            fail: function(res){
+              console.log(res.data);
+            }
+          })
+        }
       }
     })
   },

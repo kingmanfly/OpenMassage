@@ -1,5 +1,8 @@
 // pages/home/home.js
 var app = getApp();
+var currentPage = 1;
+var PAGE_SIZE = 4;
+
 Page({
 
   /**
@@ -18,7 +21,8 @@ Page({
 
     // 附近按摩技师
     recommends: [],
-    isAuthLocation: false
+    isAuthLocation: false,
+    isNoMoreData: false
   },
 
   /**
@@ -30,7 +34,7 @@ Page({
       that.setData({
         isAuthLocation: true
       })
-      that.getNearbySkiller();
+      that.getNearbySkiller(currentPage);
     }
   },
   getLocation: function(){
@@ -42,7 +46,10 @@ Page({
         app.globalData.longitude = res.longitude;
         console.log("latitude = " + app.globalData.latitude);
         console.log("longitude = " + app.globalData.longitude);
-        that.getNearbySkiller();
+        that.setData({
+          isAuthLocation: true
+        })
+        that.getNearbySkiller(currentPage);
       },
       fail: res => {
         console.log("fail res = " + res);
@@ -53,14 +60,17 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+    console.log("onPullDownRefresh")
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+    console.log("onReachBottom");
+    if(!this.data.isNoMoreData){
+      this.getNearbySkiller(++currentPage);
+    }
   },
 
   /**
@@ -75,7 +85,8 @@ Page({
       url: '/pages/massagist/massagist?id=' + event.currentTarget.id,
     })
   },
-  getNearbySkiller: function(){
+  getNearbySkiller: function(page){
+    wx.showNavigationBarLoading();
     let _this = this;
     wx.request({
       url: app.globalData.urlBase2 + 'skillerUser/nearlyskillers',
@@ -83,20 +94,34 @@ Page({
       data:{
         latitude: app.globalData.latitude,
         longitude: app.globalData.longitude,
-        pageNo: '1',
-        pageSize: '10'
+        pageNo: page,
+        pageSize: PAGE_SIZE
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
       success: function (res) {
         console.log(res.data);
-        _this.setData({
-          recommends:res.data.data.nearlyskillers
-        });
+        if(res.data.data.nearlyskillers == null || res.data.data.nearlyskillers.length == 0){
+          _this.setData({
+            isNoMoreData: true
+          });
+        } else if (res.data.data.nearlyskillers.length == PAGE_SIZE){
+          _this.setData({
+            recommends: _this.data.recommends.concat(res.data.data.nearlyskillers)
+          });
+        }else{
+          _this.setData({
+            isNoMoreData: true,
+            recommends: _this.data.recommends.concat(res.data.data.nearlyskillers)
+          });
+        }
       },
       fail: function (res) {
         console.log(res);
+      },
+      complete: function(){
+        wx.hideNavigationBarLoading();
       }
     })
   },

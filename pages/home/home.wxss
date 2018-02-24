@@ -54,3 +54,8 @@
   font-size: 36rpx;
   padding: 10rpx;
 }
+.bottom-center{
+  text-align: center;
+  margin-bottom: 20rpx;
+  color: #666;
+}

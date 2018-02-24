@@ -106,5 +106,12 @@ Page({
     wx.navigateTo({
       url: '/pages/login/login',
     })
+  },
+  onPreview: function(event){
+    console.log(event);
+    wx.previewImage({
+      current: event.currentTarget.dataset.item, // 当前显示图片的http链接
+      urls: event.currentTarget.dataset.set // 需要预览的图片http链接列表
+    })
   }
 })
